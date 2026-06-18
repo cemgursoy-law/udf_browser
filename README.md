@@ -1,6 +1,6 @@
 # UDF Wizard
 
-Word (.docx), PDF (.pdf) ve UYAP UDF (.udf) dosyalarını birbirine çeviren,
+UYAP UDF (.udf), Word (.docx) ve PDF (.pdf)  dosyalarını birbirine çeviren,
 **tamamen tarayıcıda çalışan** bir araç. Kurulum yoktur — `index.html` dosyasını
 açmanız yeterli.
 
