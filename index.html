@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UDF Wizard — Word/PDF ↔ UYAP UDF</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- ÜST BAŞLIK -->
+    <header class="masthead">
+      <div class="brand">
+        <div class="mark" aria-hidden="true">
+          <!-- belge + dönüşüm + terazi sadeleştirilmiş simge -->
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 4h9l5 5v15a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" fill="#fff" opacity=".92"/>
+            <path d="M17 4l5 5h-5V4Z" fill="#fff" opacity=".55"/>
+            <path d="M11 14h10M11 18h7" stroke="#b3261e" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M14 24l-2-2 2-2M18 22h-6" stroke="#b3261e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <h1>UDF Wizard</h1>
+          <div class="tagline">Word / PDF ↔ UYAP UDF · tarayıcıda, çevrimdışı çalışır</div>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeBtn" type="button" aria-label="Tema değiştir">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span class="label">Koyu tema</span>
+      </button>
+    </header>
+
+    <!-- ADIM 1: DOSYA -->
+    <section class="step">
+      <div class="step-head">
+        <span class="step-num">1</span>
+        <span class="step-title">Dönüştürülecek dosya</span>
+      </div>
+      <div class="dropzone" id="dropzone" tabindex="0" role="button"
+           aria-label="Dosya seç veya buraya sürükle">
+        <div id="dzBody">
+          <div class="dz-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </div>
+          <div class="dz-main">Dosyaları buraya sürükleyin</div>
+          <div class="dz-sub">ya da seçmek için tıklayın · .udf, .docx, .pdf · birden çok dosya olabilir</div>
+        </div>
+      </div>
+      <input type="file" id="fileInput" accept=".udf,.docx,.pdf" multiple hidden />
+    </section>
+
+    <!-- ADIM 2: HEDEF -->
+    <section class="step disabled" id="stepTarget">
+      <div class="step-head">
+        <span class="step-num">2</span>
+        <span class="step-title">Hedef format</span>
+      </div>
+      <div class="segment" id="segment">
+        <button disabled>—</button>
+      </div>
+    </section>
+
+    <!-- DÖNÜŞTÜR -->
+    <button class="convert-btn" id="convertBtn" type="button" disabled>Dönüştür</button>
+    <div class="progress" id="progress"><div class="bar"></div></div>
+    <div class="status info" id="status"></div>
+    <div class="results" id="results"></div>
+
+    <!-- ALT BİLGİ -->
+    <footer class="colophon">
+      <strong>Gizlilik:</strong> Tüm dönüşüm tarayıcınızda, kendi cihazınızda yapılır.
+      Hiçbir dosya internete gönderilmez.
+    </footer>
+
+  </div>
+
+  <!-- kütüphaneler (yerel, çevrimdışı) -->
+  <script src="libs/jszip.min.js"></script>
+  <script src="libs/mammoth.browser.min.js"></script>
+  <script src="libs/docx.umd.js"></script>
+  <script src="libs/jspdf.umd.min.js"></script>
+  <script src="libs/fonts/liberation-serif.js"></script>
+  <script src="libs/pdf.min.js"></script>
+  <!-- uygulama -->
+  <script src="udf-core.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

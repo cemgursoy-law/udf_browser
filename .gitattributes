@@ -1,0 +1,5 @@
+# Metin dosyalarında satır sonlarını LF olarak normalleştir
+* text=auto eol=lf
+
+# Üçüncü taraf minified kütüphaneler ve gömülü font: olduğu gibi bırak
+libs/** binary

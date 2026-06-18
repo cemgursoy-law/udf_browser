@@ -1,0 +1,23 @@
+# İşletim sistemi
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editör
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node (varsa)
+node_modules/
+
+# Geçici / test çıktıları
+*.tmp
+*.log
+cikti*.docx
+cikti*.udf
+cikti*.pdf
+lorem*.docx
+lorem*.udf
+lorem*.pdf
