@@ -1,7 +1,7 @@
 # UDF Dönüştürücü
 
-UYAP UDF (.udf), Word (.docx) ve PDF (.pdf)  dosyalarını birbirine çeviren,
-**tamamen tarayıcıda çalışan** bir araç. Kurulum yoktur — `index.html` dosyasını
+UYAP UDF (.udf), Word (.docx) ve PDF (.pdf) dosyalarını birbirine çeviren,
+tamamen tarayıcıda çalışan bir araç. Kurulum yoktur, `index.html` dosyasını
 açmanız yeterli.
 
 ## Gizlilik
@@ -12,10 +12,10 @@ gönderilmez. Sayfa bir kez açıldıktan sonra internet bağlantısı olmadan d
 ## Nasıl kullanılır?
 
 1. `index.html` dosyasına çift tıklayın (varsayılan tarayıcınızda açılır).
-2. Dosyaları pencereye **sürükleyip bırakın** ya da tıklayıp seçin
+2. Dosyaları pencereye sürükleyip bırakın ya da tıklayıp seçin
    (.udf, .docx veya .pdf — birden çok dosya olabilir).
-3. **Hedef formatı** seçin.
-4. **Dönüştür**'e basın; sonuç otomatik iner (çoklu dosyada her biri için
+3. Hedef formatı seçin.
+4. Dönüştür'e basın; sonuç otomatik iner (çoklu dosyada her biri için
    indirme bağlantısı çıkar).
 
 Sağ üstteki düğmeyle açık/koyu tema arasında geçebilirsiniz.

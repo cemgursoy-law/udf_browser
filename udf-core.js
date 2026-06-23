@@ -491,7 +491,8 @@ const UDF = (() => {
 
     for (const p of paragraphs) {
       doc.setFont("LiberationSerif", p.bold ? "bold" : "normal");
-      const text = p.text || " ";
+      // jsPDF text() sekmede dizgiyi keser; sekmeleri boşluğa çevir (basit yol)
+      const text = (p.text || " ").replace(/\t/g, "    ");
       const lines = doc.splitTextToSize(text, maxW);
       for (const ln of lines) {
         if (y > doc.internal.pageSize.getHeight() - margin) { doc.addPage(); y = margin; }
@@ -555,9 +556,48 @@ const UDF = (() => {
       }
       prevWasNumber = !!(p.list && p.list.kind === "number");
 
-      const text = p.runs.map((r) => r.text).join("") || " ";
       const firstIndent = (p.firstLineIndent && !p.list) ? 24 : 0;
       const avail = pageW - margin - baseX;
+      const rightX = pageW - margin;
+
+      // jsPDF'in doc.text() metodu, metin içindeki ilk SEKME (\t) karakterinde
+      // dizgiyi keser; sekme sonrası içerik sessizce kaybolur. UYAP UDF'leri
+      // etiket↔değer hizalaması için yoğun sekme kullandığından (ör. "Esas No\t:
+      // 2024/..."), sekmeli satırları run/segment bazında, sekme duraklarına
+      // hizalayıp her run'ı kendi biçimiyle (kalın/punto) elle çiziyoruz.
+      const hasTab = p.runs.some((r) => r.text.indexOf("\t") >= 0);
+      if (hasTab) {
+        const TAB_STOP = 36; // ~0.5 inch — Word varsayılan sekme aralığı
+        ensure(lineH);
+        if (marker) { doc.setFont(FONT, "normal"); doc.text(marker, margin + 6, y); }
+        let x = baseX + firstIndent;
+        for (const r of p.runs) {
+          const rs = (r.size && r.size > 0) ? r.size : bodySize;
+          const segs = r.text.split("\t");
+          for (let si = 0; si < segs.length; si++) {
+            if (si > 0) { // sekme: bir sonraki sekme durağına ilerle
+              const rel = x - baseX;
+              x = baseX + Math.ceil((rel + 1) / TAB_STOP) * TAB_STOP;
+              if (x > rightX - 2) { y += lineH; ensure(lineH); x = baseX; }
+            }
+            const seg = segs[si];
+            if (!seg) continue;
+            doc.setFontSize(rs);
+            doc.setFont(FONT, r.bold ? "bold" : "normal");
+            for (const w of seg.split(/(\s+)/)) { // kelime bazında sar
+              if (!w) continue;
+              const ww = doc.getTextWidth(w);
+              if (x + ww > rightX && x > baseX) { y += lineH; ensure(lineH); x = baseX; if (/^\s+$/.test(w)) continue; }
+              doc.text(w, x, y);
+              x += ww;
+            }
+          }
+        }
+        y += lineH + 4;
+        continue;
+      }
+
+      const text = p.runs.map((r) => r.text).join("") || " ";
       const lines = doc.splitTextToSize(text, avail - firstIndent);
 
       for (let i = 0; i < lines.length; i++) {
