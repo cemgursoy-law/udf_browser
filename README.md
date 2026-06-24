@@ -11,6 +11,11 @@ gönderilmez. Sayfa bir kez açıldıktan sonra internet bağlantısı olmadan d
 
 ## Nasıl kullanılır?
 
+> Önemli: ZIP olarak indirdiyseniz önce sağ tıklayıp "Tümünü Ayıkla" (Extract All)
+> ile gerçek bir klasöre çıkarın. ZIP'in içine girip dosyaları ayıklamadan doğrudan
+> `index.html`'e çift tıklarsanız `style.css` ve `libs/` içindeki dosyalar yüklenmez;
+> arayüz bozuk görünür (büyük ikonlar, varsayılan yazı tipi) ve dönüşüm çalışmaz.
+
 1. `index.html` dosyasına çift tıklayın (varsayılan tarayıcınızda açılır).
 2. Dosyaları pencereye sürükleyip bırakın ya da tıklayıp seçin
    (.udf, .docx veya .pdf — birden çok dosya olabilir).
